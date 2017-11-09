@@ -28,6 +28,8 @@ namespace ISApi
             services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddCors();
+
             services.AddMvc();
         }
 
@@ -38,6 +40,9 @@ namespace ISApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:4200"));
 
             app.UseMvc();
         }
