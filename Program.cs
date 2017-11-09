@@ -20,6 +20,8 @@ namespace ISApi
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .UseKestrel()
+                .UseUrls("http://192.168.0.32:8090")
                 .Build();
     }
 }
