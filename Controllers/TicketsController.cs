@@ -25,7 +25,7 @@ namespace ISApi.Controllers
         [HttpGet]
         public IEnumerable<Ticket> GetTickets()
         {
-            return _context.Tickets;
+            return _context.Tickets.OrderByDescending(t => t.DateCreated);
         }
 
         // GET: api/Tickets/5
