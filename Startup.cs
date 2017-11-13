@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ISApi.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +30,7 @@ namespace ISApi
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddCors();
+            
 
             services.AddMvc();
         }
@@ -40,6 +42,13 @@ namespace ISApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+
+            app.UseAuthentication();
 
             app.UseCors(builder =>
                 builder.WithOrigins("http://localhost:4200"));
