@@ -21,7 +21,7 @@ namespace ISApi
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .UseKestrel()
-                .UseUrls("http://localhost:8090")
+                .UseUrls("http://localhost:8080")
                 .Build();
     }
 }
